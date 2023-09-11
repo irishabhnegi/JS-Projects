@@ -3,7 +3,7 @@ const board = document.querySelector('.board')
 let inputDir = { x: 0, y: 0 }
 
 let lastTime = 0
-let speed = 5
+const speed = 5
 let snakeArr = [{ x: 14, y: 14 }]
 let foodDir = { x: 5, y: 5 }
 
