@@ -4,10 +4,42 @@ let inputDir = { x: 0, y: 0 }
 
 let lastTime = 0
 let speed = 5
-let snakeArr = [{ x: 13, y: 15 }]
-let foodDir = { x: 4, y: 6 }
+let snakeArr = [{ x: 14, y: 14 }]
+let foodDir = { x: 5, y: 5 }
+
+function main(ctime) {
+  window.requestAnimationFrame(main)
+  if ((ctime - lastTime) / 1000 < 1 / speed) {
+    return
+  }
+  lastTime = ctime
+  gameEngine()
+}
+
+function isCollide(snake) {
+  for (let i = 1; i < snake.length; i++) {
+    if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+      return true
+    }
+  }
+  if (
+    snake[0].x >= 18 ||
+    snake[0].x <= 0 ||
+    snake[0].y >= 18 ||
+    snake[0].y <= 0
+  ) {
+    return true
+  }
+  return false
+}
 
 function gameEngine() {
+  if (isCollide(snakeArr)) {
+    inputDir = { x: 0, y: 0 }
+    alert('Game-over!, press any key to restart')
+    snakeArr = [{ x: 13, y: 15 }]
+    score = 0
+  }
   if (snakeArr[0].x === foodDir.x && snakeArr[0].y === foodDir.y) {
     snakeArr.unshift({
       x: snakeArr[0].x + inputDir.x,
@@ -44,15 +76,6 @@ function gameEngine() {
   food.style.gridRowStart = foodDir.x
   food.style.gridColumnStart = foodDir.y
   board.appendChild(food)
-}
-
-function main(ctime) {
-  window.requestAnimationFrame(main)
-  if ((ctime - lastTime) / 1000 < 1 / speed) {
-    return
-  }
-  lastTime = ctime
-  gameEngine()
 }
 
 window.requestAnimationFrame(main)
