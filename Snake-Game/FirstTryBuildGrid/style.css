@@ -31,7 +31,6 @@ body {
   display: block;
 }
 .wall {
-  /* border: 0.5px solid red; */
   background-color: rgb(133, 127, 127);
 }
 
