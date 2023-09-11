@@ -1,13 +1,33 @@
 const board = document.querySelector('.board')
 
-let direction = { x: 0, y: 1 }
+let inputDir = { x: 0, y: 0 }
 
 let lastTime = 0
-let speed = 2
+let speed = 5
 let snakeArr = [{ x: 13, y: 15 }]
 let foodDir = { x: 4, y: 6 }
 
 function gameEngine() {
+  if (snakeArr[0].x === foodDir.x && snakeArr[0].y === foodDir.y) {
+    snakeArr.unshift({
+      x: snakeArr[0].x + inputDir.x,
+      y: snakeArr[0].y + inputDir.y,
+    })
+    let a = 2
+    let b = 16
+    foodDir = {
+      x: Math.round(a + (b - a) * Math.random()),
+      y: Math.round(a + (b - a) * Math.random()),
+    }
+  }
+
+  for (let i = snakeArr.length - 2; i >= 0; i--) {
+    snakeArr[i + 1] = { ...snakeArr[i] }
+  }
+
+  snakeArr[0].x += inputDir.x
+  snakeArr[0].y += inputDir.y
+
   board.innerHTML = ''
   snakeArr.forEach((e, index) => {
     let snakeElem = document.createElement('div')
@@ -38,19 +58,30 @@ function main(ctime) {
 window.requestAnimationFrame(main)
 
 window.addEventListener('keydown', (e) => {
+  inputDir = { x: 0, y: 0 }
   console.log(e.key)
   switch (e.key) {
     case 'ArrowUp':
-      console.log('up')
+      inputDir.x = -1
+      inputDir.y = 0
+
+      console.log(e.key)
       break
     case 'ArrowDown':
-      console.log('down')
+      inputDir.x = 1
+      inputDir.y = 0
+
+      console.log(e.key)
       break
     case 'ArrowLeft':
-      console.log('left')
+      inputDir.x = 0
+      inputDir.y = -1
+      console.log(e.key)
       break
     case 'ArrowRight':
-      console.log('right')
+      inputDir.x = 0
+      inputDir.y = 1
+      console.log(e.key)
       break
 
     default:
