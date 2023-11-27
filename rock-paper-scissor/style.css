@@ -1,0 +1,24 @@
+.computer-choice,
+.player-choice,
+.result,
+.play-buttons,
+.score {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Arial Narrow', Arial, sans-serif;
+}
+
+.play-buttons > button {
+  padding: 0.5rem;
+  font-size: 15px;
+}
+.red {
+  color: red;
+  margin-inline: 1rem;
+}
+
+.green {
+  color: green;
+  margin-inline: 1rem;
+}
