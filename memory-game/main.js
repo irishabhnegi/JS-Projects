@@ -42,6 +42,7 @@ let clickedIndex = 0;
 // let clickedIndex2
 let target1;
 // let target2
+let count = 0;
 
 function updateResults(matched, chances, score) {
   matchedCont.innerText = `Matched: ${matched}`;
@@ -76,6 +77,7 @@ function handleClick(e) {
           score = Math.floor((matched / chances) * 1000);
           storedVal = '';
           clickedIndex = 0;
+          count++;
         } else {
           setTimeout(() => {
             target1.setAttribute('src', './images/blank.png');
@@ -93,7 +95,11 @@ function handleClick(e) {
     }
   }
 
-  for(let elem of )
+  if (count >= 6) {
+    const elem = document.createElement('h1');
+    elem.innerText = `You Won! And Your Score is ${score}`;
+    cards.innerHTML = elem;
+  }
 }
 
 cards.addEventListener('click', handleClick);
